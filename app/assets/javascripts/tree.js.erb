@@ -1,0 +1,153 @@
+var readytree;
+
+readytree = function() {
+
+
+  //receives data from rails; parses/prepares it
+
+  //selects div with ruby data
+  var div = document.getElementById('node_div');
+  //selects ruby data as string
+  var divData = div.getAttribute("data-nodes");
+  //parsing to JSON in JavaScript
+  var data = JSON.parse(divData);
+
+  // create a name: node map
+var dataMap = data.reduce(function(map, node) {
+  map[node.name] = node;
+  return map;
+}, {});
+
+  // create the tree array
+  var treeData = [];
+  data.forEach(function(node) {
+    // add to parent
+    var parent = dataMap[node.parent];
+    var project_id = dataMap[node.project_id];
+    var id = dataMap[node.project_id];
+    if (parent) {
+      // create child array if it doesn't exist
+      (parent.children || (parent.children = []))
+        // add node to child array
+        .push(node);
+    } else {
+      // parent is null or missing
+      treeData.push(node);
+    }
+  });
+
+  var rootstring = JSON.stringify(treeData[0]);
+
+  var root = JSON.parse(rootstring);
+  var data = [];
+
+  data.push(root);
+
+
+
+var $tree = $('#tree1').tree({
+    data: data,
+    autoOpen: true,
+    openedIcon: '',
+    saveState: 'tree1'
+});
+
+var listtree = $('#tree1').tree('getTree');
+
+$('#tree1').bind(
+    'tree.click',
+    function(event) {
+        // The clicked node is 'event.node'
+        var node = event.node;
+        var theURL = "nodes/"+ node.id;
+        if (theURL) {
+            location.href = theURL;
+        }
+    }
+);
+//here's the way to get tree to json after changing it
+//bind this to an event handler to allow users to save
+// //the state when they want after sorting things
+
+// function flatten(target, opts) {
+//   opts = opts || {}
+
+//   var delimiter = opts.delimiter || '.'
+//   var output = {}
+
+//   function step(object, prev) {
+//     Object.keys(object).forEach(function(key) {
+//       var value = object[key]
+//       var isarray = opts.safe && Array.isArray(value)
+//       var type = Object.prototype.toString.call(value)
+//       var isobject = (
+//         type === "[object Object]" ||
+//         type === "[object Array]"
+//       )
+
+//       var newKey = prev
+//         ? prev + delimiter + key
+//         : key
+
+//       if (!isarray && isobject) {
+//         return step(value, newKey)
+//       }
+
+//       output[newKey] = value
+//     })
+//   }
+
+//   step(target)
+
+//   return output
+// }
+
+// // var list = [];
+
+// _.each($('#tree1').tree('getTree'), function(item){
+//     list.push(_.omit(item, 'children'));
+//     list.push(_.flatten(_.pick(item, 'children')));
+// });
+
+// var result = _.flatten(list);
+
+// $.each(eval(testdata), walker);
+// var arr = []
+// function walker(key, value) {
+//     var obj = {}
+//     // ...do what you like with `key` and `value`
+//     if (key === "id" || key === "name" || key === "parent") {
+//       obj[key] = value;
+//     }
+//     arr.push(obj);
+//     if (key !== null && typeof value === "object") {
+//         // Recurse into children
+//         $.each(value, walker);
+//     }
+// }
+
+// $("#btnSubmit").click(function(){
+//         t = $('#tree1').tree('getTree');
+//         d = $.each(t, walker);
+//         console.log(d);
+        
+//     }); 
+
+// // $("#btnSubmit").click(function(){
+//         d = $.each($('#tree1').tree('toJson'), walker);
+        
+//         $.ajax({
+//           type: 'POST',
+//           url: '/batchupdate',
+//           datatype: 'json',
+//           data: d
+//                   })
+//     }); 
+}
+
+
+
+$(document).ready(readytree);
+$(document).on('page:load', readytree);
+
+
