@@ -1,0 +1,22 @@
+<h1><%= @project.project_name %></h1>
+  <ul class="nav nav-pills">
+    <li ><%=  link_to "Tree", project_path(@project.id) %></li>
+    <li ><%=  link_to "List", list_project_path(@project.id) %></li>
+  </ul>
+</br>
+  <div class="border-form-div col-md-4">
+<%= form_for ([@project, @node]), node: {action: "update"} do |f| %>
+  <p>
+    <%= f.label "Node Name" %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    
+      <%= f.label :parent %><br>
+      <%= f.collection_select :parent, @nodes,:name,:name %>
+    
+  </p>
+  <p>
+    <%= f.submit %>
+<% end %>
+</div>

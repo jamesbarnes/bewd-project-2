@@ -1,1 +1,21 @@
-Hey! This is the homepage!
+<div class="row" style="padding-top:100px">
+  <div class="jumbotron">
+  
+    <h1>Welcome to Muphry</h1>
+    <p class="lead">
+      Make some trees.
+    </p>
+    <% if user_signed_in? %>
+    <%= link_to "My Dashboard", user_path(current_user.id), :class => 'btn btn-large btn-primary' %>
+  <% else %>
+    <div class="row-fluid">
+      
+        <%= link_to "Sign In", new_user_session_path, :class => "btn btn-success" %>
+      
+      
+        <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>

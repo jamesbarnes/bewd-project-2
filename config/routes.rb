@@ -1,7 +1,21 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'home#index'
+  resources :home, :users, :nodes
+
+  resources :nodes
+  post 'batchupdate', to: "nodes#batchupdate"
+  resources :projects do
+    member do
+      get 'list'
+    end
+  end
+  
+  resources :projects do
+    resources :nodes
+  end
+
+   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

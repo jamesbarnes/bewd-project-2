@@ -1,0 +1,16 @@
+<h3>Dashboard</h3>
+</br>
+
+
+
+<div id="projects">
+  
+    <% if user_signed_in? %>
+      <%= render current_user.projects %>
+    <% end %>
+
+  </ul>
+
+
+<%= link_to "New Project", new_project_path %>
+</div>

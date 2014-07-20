@@ -1,0 +1,40 @@
+
+
+<h1><%= @project.project_name %></h1>
+  <ul class="nav nav-pills">
+    <li ><%=  link_to "Tree", project_path %></li>
+    <li class="active"><a href="#">List</a></li>
+  </ul>
+</br>
+
+
+<h3><%= @project.description %></h3> </br>
+
+<div id="out"></div>
+
+ <div id="node_div" data-nodes="<%= @nodes_array.to_json %>">
+
+<div class="row">
+
+  <div id="tree1", class="col-md-8"></div> 
+  
+  <div class="border-form-div col-md-4">
+  <h4> New node </h4></br>
+  <%= form_for([@project, @project.nodes.build]) do |f| %>
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%if @project.nodes %>
+        <%= f.label :parent %><br>
+        <%= f.collection_select :parent, @nodes,:name,:name %>
+      <% end %>
+    </p>
+    <p>
+    <p>
+      <%= f.submit "Add node", :class=>'btn btn-primary' %>
+    </p>
+  <% end %>
+</div>
+</div>

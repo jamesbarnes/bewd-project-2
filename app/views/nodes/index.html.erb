@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Collapsible Tree Example</title>
+
+    <style>
+
+      .node {
+          cursor: pointer;
+      }
+      .node circle {
+          fill: #fff;
+          stroke: steelblue;
+          stroke-width: 1.5px;
+      }
+      .node text {
+          font: 10px sans-serif;
+      }
+      .link {
+          fill: none;
+          stroke: #ccc;
+          stroke-width: 1.5px;
+      }
+      #vizdiv {
+        border: 1px solid;
+        float: right;
+      }
+
+body {
+    overflow: hidden;
+}
+    </style>
+
+  </head>
+
+  <body>
+      <div id="node_div" data-nodes="<%= @nodes_array.to_json %>">
+
+  <div id="vizdiv">
+  </div>
+
+  <div id="node_listing">
+    <%= link_to "New", new_node_path(@node) %>
+    <%@nodes.each do |node|%>
+    <p>
+      <%=link_to node.name, node %>
+    </p>
+   <%end%>
+
+  </div>
+
+  
+
+  
+  </body>
+</html>

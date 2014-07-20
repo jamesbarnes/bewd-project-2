@@ -1,0 +1,17 @@
+<h1><%= @project.project_name %></h1>
+  <ul class="nav nav-pills">
+    <li ><%=  link_to "Tree", project_path(@project.id) %></li>
+    <li ><%=  link_to "List", list_project_path(@project.id) %></li>
+  </ul>
+</br>
+
+
+<div class="border-form-div col-md-4">
+<p><b>Node Name:</b></br>
+<%= @node.name %></p>
+<p><b>Node Parent:</b><br>
+<%= @node.parent %></p>
+
+<%=link_to "Edit", edit_project_node_path(@project.id, @node.id) %> | 
+<%=link_to "Delete", project_node_path, method: :delete, data: {confirm: 'Are you sure?'} %>
+</div>

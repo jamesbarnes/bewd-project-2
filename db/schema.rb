@@ -13,6 +13,24 @@
 
 ActiveRecord::Schema.define(version: 20140720145130) do
 
+  create_table "nodes", force: true do |t|
+    t.string   "name"
+    t.string   "parent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  add_index "nodes", ["project_id"], name: "index_nodes_on_project_id"
+
+  create_table "projects", force: true do |t|
+    t.string   "project_name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

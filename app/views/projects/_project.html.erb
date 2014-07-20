@@ -1,0 +1,14 @@
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= link_to project.project_name, project %>
+      <%= link_to raw('<span class="glyphicon glyphicon-remove pull-right"></span>'), project, method: :delete, data: {confirm: 'Are you sure?'} %> 
+      <%= link_to raw('<span class="glyphicon glyphicon-cog pull-right"></span>'), edit_project_path%></div>
+      <div class="panel-body"><p> <%= project.description %> </p>
+        <p><%= project.nodes.length %> nodes </p>
+      </div>
+    </div>
+  </div>
+</div>

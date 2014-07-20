@@ -1,0 +1,11 @@
+<h1><%= @project.project_name %></h1>
+
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#">Tree</a></li>
+    <li><%= link_to "List", list_project_path %></li>
+  </ul>
+</br>
+  <div id="node_div" data-nodes="<%= @nodes_array.to_json %>">
+
+  <div id="vizdiv">
+  </div>

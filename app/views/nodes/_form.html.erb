@@ -1,0 +1,14 @@
+  <%= form_for([@project, @node]) do |f| %>
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_area :name %>
+    </p>
+    <p>
+      <%if @project.nodes %>
+        <%= f.label :parent %><br>
+        <%= f.collection_select :parent, @nodes,:name,:name %>
+      <% end %>
+    </p>
+    <p>
+    <p>
+      <%= f.submit %>
