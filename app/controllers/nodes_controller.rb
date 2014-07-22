@@ -33,14 +33,16 @@ class NodesController < ApplicationController
 #ask about update help here 
   def update
     @node = Node.find(params[:id])
-    @node.update(node_params)
     @project = Project.find(params[:project_id])
-    redirect_to list_project_path
+    if @node.update(node_params)
+      redirect_to list_project_path(@project.id)
+    else
+      render 'edit'
+    end
   end
 
   def batchupdate
     @batch = eval(params.to_s)
-    binding.pry
   end
 
   def edit

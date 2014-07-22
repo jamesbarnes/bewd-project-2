@@ -17,7 +17,7 @@ gem 'sqlite3', group: [:development, :test]
 
 group :development do
   gem 'pry-rails'
-  gem "better_errors"
+  #gem "better_errors"
   gem "binding_of_caller"
 end
 
