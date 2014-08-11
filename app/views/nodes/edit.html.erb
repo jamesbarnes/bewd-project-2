@@ -11,10 +11,8 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    
       <%= f.label :parent %><br>
       <%= f.collection_select :parent, @nodes,:name,:name %>
-    
   </p>
   <p>
     <%= f.submit %>
